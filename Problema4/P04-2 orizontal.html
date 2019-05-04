@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+table {
+  border-spacing: 0;
+  width: 400px;
+}
+
+th {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+  border-top: 1px solid;
+}
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){	
+	var tabel = $("#tabel");
+	tabel.on("click", "th", function() {
+		var row = $(this).closest("tr").index();		
+		var noCats = tabel.find('tr').find('td').length/tabel.find('tr').length
+		
+		for(var i = 0; i < noCats - 1; i++){
+			for(var j = i+1; j < noCats; j++){
+				var val1 = tabel.find('tr:eq('+row+')').find('td:eq('+i+')').text();
+				var val2 = tabel.find('tr:eq('+row+')').find('td:eq('+j+')').text();
+				
+				if($(this).html() == "Price"){
+					val1 = parseInt(val1);
+					val2 = parseInt(val2);
+				}
+				
+				if(val1 > val2){
+					//swap positions i and j for each row
+					//the CLASSIC sort method
+					for(var k = 0; k < tabel.find('tr').length; k++){
+						//save the value from [k][i]
+						var vali = tabel.find('tr:eq('+k+')').find('td:eq('+i+')').text();
+						//save the value from [k][j]
+						var valj = tabel.find('tr:eq('+k+')').find('td:eq('+j+')').text();
+						//put in [k][i] the [k][j]
+						tabel.find('tr:eq('+k+')').find('td:eq('+i+')').text(valj);
+						//put in [k][j] the [k][i]
+						tabel.find('tr:eq('+k+')').find('td:eq('+j+')').text(vali);
+					}
+				}
+			}
+		}
+	});
+});
+</script>
+
+
+</head>
+
+<body>
+<table id="tabel">
+  <tr>
+    <th>Cats</th>
+    <td>Bombay</td>
+    <td>Bengal</td>
+    <td>Birman</td>
+    <td>British shorthair</td>
+    <td>Himalayan</td>
+    <td>Maine coon</td>
+    <td>Persian</td>
+    <td>Scottish fold</td>    
+  </tr>
+  
+  <tr>
+    <th>Price</th>
+    <td>1000</td>
+    <td>6000</td>
+    <td>600</td>
+    <td>500</td>
+    <td>100000</td>
+    <td>999</td>
+    <td>100</td>
+    <td>2500</td>   
+  </tr>
+  
+  <tr>
+    <th>Fur pattern</th>
+    <td>Fluffy</td>
+    <td>Gray</td>
+    <td>Stripped</td>
+    <td>Puffy</td>
+    <td>Black</td>
+    <td>Fat</td>
+    <td>Dotted</td>
+    <td>No hair</td>
+  
+</table>
+
+</body>
+</html>

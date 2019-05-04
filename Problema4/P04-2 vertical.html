@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  border-spacing: 0;
+  width: 400px;
+}
+
+th {
+  cursor: pointer;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+  border-top: 1px solid;
+}
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){	
+	var tabel = $("#tabel");
+	tabel.on("click", "th", function() {
+		//get the index of the clicked column
+		var aux2 = $(this).closest('th');
+		var col = aux2.parent().children().index(aux2);		
+		var noCats = tabel.find('tr').length 
+		
+		for(var i = 1; i < noCats - 1; i++){
+			for(var j = i+1; j < noCats; j++){
+				var val1 = tabel.find('tr:eq('+i+')').find('td:eq('+col+')').text();
+				var val2 = tabel.find('tr:eq('+j+')').find('td:eq('+col+')').text();
+				
+				if($(this).html() == "Price"){
+					val1 = parseInt(val1);
+					val2 = parseInt(val2);
+				}
+				
+				if(val1 > val2){
+					//swap positions i and j for each row
+					//the CLASSIC sort method
+					for(var k = 0; k < tabel.find('th').length; k++){
+						//save the value from [i][k]
+						var vali = tabel.find('tr:eq('+i+')').find('td:eq('+k+')').text();
+						//save the value from [j][k]
+						var valj = tabel.find('tr:eq('+j+')').find('td:eq('+k+')').text();
+						//put in [k][i] the [j][k]
+						tabel.find('tr:eq('+i+')').find('td:eq('+k+')').text(valj);
+						//put in [k][j] the [i][k]
+						tabel.find('tr:eq('+j+')').find('td:eq('+k+')').text(vali);
+					}
+				}
+			}
+		}
+	});
+});
+</script>
+
+</head>
+<body>
+
+
+<table id="tabel">
+  <tr>
+    <th>Cats</th>
+    <th>Price</th>
+    <th>Fur</th>
+  </tr>
+  <tr>
+    <td>Bombay</td>
+    <td>1000</td>
+    <td>Fluffy</td>
+  </tr>
+  <tr>
+    <td>Bengal</td>
+    <td>6000</td>
+    <td>Gray</td>
+  </tr>
+  <tr>
+    <td>Birman</td>
+    <td>600</td>
+    <td>Stripped</td>
+  </tr>
+  <tr>
+    <td>British shorthair</td>
+    <td>500</td>
+    <td>Puffy</td>
+  </tr>
+  <tr>
+    <td>Himalayan</td>
+    <td>10000</td>
+    <td>Black</td>
+  </tr>
+  <tr>
+    <td>Maine coon</td>
+    <td>999</td>
+    <td>Fat</td>
+  </tr>
+  <tr>
+    <td>Persian</td>
+    <td>100</td>
+    <td>Dotted</td>
+  </tr>
+  <tr>
+    <td>Scottish fold</td>
+    <td>2500</td>
+    <td>No hair</td>
+  </tr>
+</table>
+
+
+</body>
+</html>

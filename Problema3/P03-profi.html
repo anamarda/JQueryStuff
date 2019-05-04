@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="P03.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+
+	//create the random values for the game
+	var a = new Array(16); 
+	var k = 0;        
+
+	for(var i = 0; i < 16; i++){
+		if(i%2 == 0)
+			a[i] = ++k;
+		else
+			a[i] = k;
+		console.log(a[i]);
+	}
+
+	for(var i = 0; i<16; i++){
+		var r = Math.floor((Math.random() * 16));
+				
+		var aux = a[i];
+		a[i] = a[r];
+		a[r] = aux;
+	}
+			
+	var mat = new Array(4);			
+	for (var i = 0; i < 10; i++) {
+		mat[i] = new Array(4);
+	}
+			
+	//save the values in a matrix
+	k = 0;	
+	for(var i = 0; i < 4; i++){
+		for(var j = 0; j<4; j++){
+			mat[i][j] = a[k++];
+		}
+	}
+
+	var noFaced = 0;
+	var val1 = 0;
+	var val2 = 0;
+	var val3 = 0;
+	
+	$("#tabel").on("click", "td", function() {
+			var row = $(this).closest("tr").index();
+			var aux2 = $(this).closest('td');
+			var col = aux2.parent().children().index(aux2);
+			
+			var image = '<img src="'+mat[row][col]+'.jpg">';
+			$(this).html(image);
+			$(this).find("img").css("visibility", "visible");
+			
+			
+			//save the clicked values 
+			if(val1 != 0 && val2 != 0){
+				val3 = $(this);
+			}
+			else{
+				if(val1 != 0){
+					val2 = $(this);
+				}
+				else{
+					val1 = $(this);
+				}
+			}
+			
+			noFaced++;
+			
+			//there were 2 values clicked
+			if(noFaced == 3){
+				if(val1.html() != val2.html()){
+					val1.find("img").css("visibility", "hidden");
+					val2.find("img").css("visibility", "hidden");												
+				}
+				
+				val1 = val3;
+				val2 = 0
+				val3 = 0;
+				noFaced = 1;
+			}
+	});
+
+});       
+</script>
+
+</head>
+
+<body>
+	<h2> Memory Game </h2>
+	
+	<div class="content">
+        <table id="tabel">
+           <tr>
+               <td><span></span></td>
+               <td><span></span></td>
+               <td><span></span></td>
+               <td><span></span></td>
+           </tr>
+           <tr>
+               <td><span></span></td>
+               <td><span></span></td>
+               <td><span></span></td>
+               <td><span></span></td>
+           </tr>
+           <tr>
+               <td><span></span></td>
+               <td><span></span></td>
+               <td><span></span></td>
+               <td><span></span></td>
+           </tr>
+           <tr>
+               <td><span></span></td>
+               <td><span></span></td>
+               <td><span></span></td>
+               <td><span></span></td>
+            </tr>
+        </table>
+    </div>
+	
+	
+</body>
+
+</html>

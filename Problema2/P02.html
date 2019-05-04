@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	
+<style>
+	body{
+		padding: 0px 10px;
+	}
+	input{
+		margin: 10px;
+		border: 1px solid black;
+	}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+	$("#button").click(function(){
+	
+		$("input").css("border", "1px solid black");
+		$("#infoText").text("");
+
+		var erori = new Array();
+		var doc = document.Formular;
+		
+		if($("#name").val().length == 0) erori.push("name");
+		if($("#birth").val() == "") erori.push("birth");
+		if($("#age").val() <= 0 || doc.age.value == null) erori.push("age");
+		if($("#email").val().indexOf("@") == -1) erori.push("email");
+		
+		var str = "";
+		if(erori.length != 0){
+			for(i=0; i < erori.length; i++){
+				document.getElementsByName(erori[i])[0].style.border="2px red solid";
+			}
+			str = "*The fields " + erori.join(" ") + " are not ok.";
+		}
+		else{
+			str = "All data is correct.";
+		}
+		
+		$("#infoText").text(str);
+	});
+});
+</script>
+
+</head>
+
+<body>
+	<h3> We want your personal data! </h3>
+
+	<form name="Formular">
+	
+		Name:
+		<input type="text" name="name" id="name"><br>
+		
+		Date of birth:
+		<input type="date" name="birth" id="birth"><br>
+		
+		Age:
+		<input type="number" name="age" id="age"><br>
+		
+		Email:
+		<input type="text" name="email" id="email"><br>
+		
+		<input type="button" value="Are you a valid person?" id="button">
+		
+		<p id="infoText"></p>
+	
+	</form>
+	
+	
+	
+</body>
+
+</html>

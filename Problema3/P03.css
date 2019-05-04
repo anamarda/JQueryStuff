@@ -1,0 +1,36 @@
+table{
+    height: 400px;
+    width: 400px;
+    border-spacing: 0;
+    background-color: white;
+}
+        
+td{
+    text-align: center;
+    border: 1px solid black;
+	font-size: 40px;
+	height: 100px;
+	width: 100px;
+	padding: 0px;
+	margin: 0px;
+}
+
+span{
+	visibility: hidden;
+}
+
+img{
+	height: 100px;
+	width: auto;
+	visibility: hidden;
+}
+	
+input{
+    background: none;
+    border: 0;
+	font-size: 48px;
+	width: 75px;
+	height: 75px;
+	}
+  
+        

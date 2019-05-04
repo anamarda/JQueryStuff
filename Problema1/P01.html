@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+	$("#list1").dblclick(function(){
+		var selected = $("#list1").children("option:selected")
+		$("#list2").append(selected);
+		$("#list1").remove(selected);
+	});
+
+	$("#list2").dblclick(function(){
+		var selected = $("#list2").children("option:selected")
+		$("#list1").append(selected);
+		$("#list2").remove(selected);
+	});
+});
+</script>
+
+</head>
+<body>
+
+<select id="list1" ondblclick="toList2()">
+	<option value="tuguiata">Tuguiata</option>
+	<option value="rotunda">Rotunda</option>
+</select>
+
+<select id="list2" ondblclick="toList1()">
+	<option value="turcoaz" >Turcoaz</option>
+	<option value="rosie">Rosie</option>
+	<option value="neagra">Neagra</option>
+	<option value="verde">Verde</option>
+</select>
+
+</body>
+</html>
